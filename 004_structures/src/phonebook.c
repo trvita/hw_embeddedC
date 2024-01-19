@@ -40,6 +40,10 @@ int main() {
 
     case 2:
       printf("Удаление абонента\n");
+      if (numOfAbonents < 1) {
+        printf("Телефонная книга пуста, удаление невозможно\n");
+        break;
+      }
       printf("Порядковый номер абонента для удаления: ");
       int deletedNumber = 0;
       scanf("%d", &deletedNumber);
@@ -80,13 +84,17 @@ int main() {
       printf("Имя: ");
       char name[MAXMEMBERLEN];
       scanf("%9s", name);
+      int totalFound = 0;
       for (int i = 0; i < numOfAbonents; i++) {
         if (!strcmp(PhoneBook[i].name, name)) {
+          totalFound++;
           printf("%9s - %9s - %9s\n", PhoneBook[i].name,
                  PhoneBook[i].second_name, PhoneBook[i].tel);
         }
       }
-
+      if (!totalFound) {
+        printf("Абонента с данным именем нет\n");
+      }
       break;
     case 4:
       printf("Абоненты - %d записей:\n", numOfAbonents);
